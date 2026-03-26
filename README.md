@@ -18,18 +18,12 @@ LangChain
 ChromaDB
 Hugging Face / Watsonx (LLM)
 Gradio
-# Project Structure
-.
-├── qabot.py
-├── requirements.txt
-├── README.md
-└── my_env/
-Installation
-# create environment
+
+# Create environment
 python3 -m venv my_env
 source my_env/bin/activate
 
-# install dependencies
+# Install dependencies
 pip install -r requirements.txt
 Run the App
 python qabot.py
