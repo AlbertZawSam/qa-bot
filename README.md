@@ -1,4 +1,4 @@
-# qa-bot
+# qa-bot-vr01
 # Overview
 
 This project is a Retrieval-Augmented Generation (RAG) application that allows users to upload a PDF and ask questions about its content.
