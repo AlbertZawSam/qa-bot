@@ -19,7 +19,7 @@ import warnings
 warnings.warn = warn
 warnings.filterwarnings("ignore")
 
-## LLM
+# LLM
 def get_llm():
     model_id = os.getenv("HF_LLM_MODEL", "google/flan-t5-small")
     tokenizer = AutoTokenizer.from_pretrained(model_id)
@@ -33,7 +33,7 @@ def get_llm():
     )
     return HuggingFacePipeline(pipeline=generation_pipeline)
 
-## Document loader
+# Document loader
 def document_loader(file):
     """Accepts either a Gradio file object or a filepath string."""
     file_path = getattr(file, "name", file)
@@ -41,7 +41,7 @@ def document_loader(file):
     loaded_document = loader.load()
     return loaded_document
 
-## Text splitter
+# Text splitter
 def text_splitter(data):
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=1000,
@@ -76,7 +76,7 @@ def retriever(file):
     retriever = vectordb.as_retriever()
     return retriever
 
-## QA Chain
+# QA Chain
 def retriever_qa(file, query):
     llm = get_llm()
     retriever_obj = retriever(file)
@@ -86,16 +86,16 @@ def retriever_qa(file, query):
         retriever=retriever_obj,
         return_source_documents=True,
     )
-    # Newer LangChain RetrievalQA expects a mapping with the "query" key
+
     response = qa.invoke({"query": query})
     return response["result"]
 
-# Create Gradio interface
+# Gradio interface
 rag_application = gr.Interface(
     fn=retriever_qa,
     allow_flagging="never",
     inputs=[
-        # Use filepath so we don't hold the file in memory; loader now handles path/obj.
+        
         gr.File(label="Upload PDF File", file_count="single", file_types=['.pdf'], type="filepath"),
         gr.Textbox(label="Input Query", lines=2, placeholder="Type your question here...")
     ],
